@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Orders – Inventory System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">📦 Inventory<span>Management System</span></div>
+        <ul class="sidebar-nav">
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-section">Master Data</li>
+            <li><a href="products.html">📦 Products</a></li>
+            <li><a href="categories.html">🗂️ Categories</a></li>
+            <li><a href="suppliers.html">🚚 Suppliers</a></li>
+            <li><a href="customers.html">👥 Customers</a></li>
+            <li class="nav-section">Transactions</li>
+            <li><a href="purchase-orders.html">🛒 Purchase Orders</a></li>
+            <li><a href="sales-orders.html">💼 Sales Orders</a></li>
+            <li><a href="invoices.html">🧾 Invoices</a></li>
+            <li><a href="payments.html">💳 Payments</a></li>
+        </ul>
+        <div class="sidebar-footer"><strong id="sidebar-username">–</strong><span id="sidebar-role"></span></div>
+    </aside>
+    <div class="main">
+        <div class="topbar"><h1>Sales Orders</h1><button class="logout-btn" id="logout-btn">Logout</button></div>
+        <div class="content">
+            <div id="msg"></div>
+
+            <div class="panel">
+                <div class="panel-header"><h2>Create Sales Order</h2></div>
+                <div class="panel-body">
+                    <form id="soForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Customer *</label>
+                                <select id="so_customer" required><option value="">-- Select Customer --</option></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date *</label>
+                                <input type="date" id="so_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="so_status">
+                                <option value="Pending">Pending</option>
+                                <option value="Shipped">Shipped</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+
+                        <h3 style="font-size:13px;margin:16px 0 8px;color:#555;">Order Items</h3>
+                        <table class="items-table" style="margin-bottom:10px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40%">Product</th>
+                                    <th style="width:20%">Quantity</th>
+                                    <th style="width:25%">Unit Price (₹)</th>
+                                    <th style="width:15%"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="soItems"></tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="addSoRow()">+ Add Item</button>
+                        <div style="margin-top:16px;">
+                            <strong style="font-size:14px;">Total: ₹<span id="soTotal">0.00</span></strong>
+                        </div>
+                        <div style="margin-top:12px;">
+                            <button type="submit" class="btn btn-success">Create Sales Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><h2>All Sales Orders</h2></div>
+                <div class="panel-body" style="padding:0">
+                    <table>
+                        <thead><tr><th>#</th><th>Customer</th><th>Date</th><th>Status</th></tr></thead>
+                        <tbody id="soTable"><tr><td colspan="4" class="text-center">Loading...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/api.js"></script>
+<script src="js/sales-orders.js"></script>
+</body>
+</html>

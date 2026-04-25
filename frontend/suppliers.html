@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers – Inventory System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">📦 Inventory<span>Management System</span></div>
+        <ul class="sidebar-nav">
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-section">Master Data</li>
+            <li><a href="products.html">📦 Products</a></li>
+            <li><a href="categories.html">🗂️ Categories</a></li>
+            <li><a href="suppliers.html">🚚 Suppliers</a></li>
+            <li><a href="customers.html">👥 Customers</a></li>
+            <li class="nav-section">Transactions</li>
+            <li><a href="purchase-orders.html">🛒 Purchase Orders</a></li>
+            <li><a href="sales-orders.html">💼 Sales Orders</a></li>
+            <li><a href="invoices.html">🧾 Invoices</a></li>
+            <li><a href="payments.html">💳 Payments</a></li>
+        </ul>
+        <div class="sidebar-footer"><strong id="sidebar-username">–</strong><span id="sidebar-role"></span></div>
+    </aside>
+    <div class="main">
+        <div class="topbar"><h1>Suppliers</h1><button class="logout-btn" id="logout-btn">Logout</button></div>
+        <div class="content">
+            <div id="msg"></div>
+            <div class="panel">
+                <div class="panel-header"><h2 id="form-title">Add Supplier</h2></div>
+                <div class="panel-body">
+                    <form id="supplierForm">
+                        <input type="hidden" id="supplier_id">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Supplier Name *</label>
+                                <input type="text" id="s_name" placeholder="Company name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact</label>
+                                <input type="text" id="s_contact" placeholder="Phone or email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="submitBtn">Add Supplier</button>
+                        <button type="button" class="btn btn-primary" id="cancelBtn" style="display:none" onclick="resetForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header"><h2>All Suppliers</h2></div>
+                <div class="panel-body" style="padding:0">
+                    <table>
+                        <thead><tr><th>#</th><th>Name</th><th>Contact</th><th>Actions</th></tr></thead>
+                        <tbody id="supplierTable"><tr><td colspan="4" class="text-center">Loading...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/api.js"></script>
+<script src="js/suppliers.js"></script>
+</body>
+</html>

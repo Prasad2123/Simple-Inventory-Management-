@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices – Inventory System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">📦 Inventory<span>Management System</span></div>
+        <ul class="sidebar-nav">
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-section">Master Data</li>
+            <li><a href="products.html">📦 Products</a></li>
+            <li><a href="categories.html">🗂️ Categories</a></li>
+            <li><a href="suppliers.html">🚚 Suppliers</a></li>
+            <li><a href="customers.html">👥 Customers</a></li>
+            <li class="nav-section">Transactions</li>
+            <li><a href="purchase-orders.html">🛒 Purchase Orders</a></li>
+            <li><a href="sales-orders.html">💼 Sales Orders</a></li>
+            <li><a href="invoices.html">🧾 Invoices</a></li>
+            <li><a href="payments.html">💳 Payments</a></li>
+        </ul>
+        <div class="sidebar-footer"><strong id="sidebar-username">–</strong><span id="sidebar-role"></span></div>
+    </aside>
+    <div class="main">
+        <div class="topbar"><h1>Invoices</h1><button class="logout-btn" id="logout-btn">Logout</button></div>
+        <div class="content">
+            <div id="msg"></div>
+
+            <!-- Generate Invoice Form -->
+            <div class="panel">
+                <div class="panel-header"><h2>Generate Invoice from Sales Order</h2></div>
+                <div class="panel-body">
+                    <form id="invForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Sales Order *</label>
+                                <select id="inv_sales" required>
+                                    <option value="">-- Select Sales Order --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Invoice Date *</label>
+                                <input type="date" id="inv_date" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Generate Invoice</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Invoices Table -->
+            <div class="panel">
+                <div class="panel-header"><h2>All Invoices</h2></div>
+                <div class="panel-body" style="padding:0">
+                    <table>
+                        <thead>
+                            <tr><th>Invoice #</th><th>Sales Order</th><th>Customer</th><th>Date</th><th>Total (₹)</th></tr>
+                        </thead>
+                        <tbody id="invTable"><tr><td colspan="5" class="text-center">Loading...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/api.js"></script>
+<script src="js/invoices.js"></script>
+</body>
+</html>

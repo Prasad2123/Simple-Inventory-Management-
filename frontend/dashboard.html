@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – Inventory System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">📦 Inventory<span>Management System</span></div>
+        <ul class="sidebar-nav">
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-section">Master Data</li>
+            <li><a href="products.html">📦 Products</a></li>
+            <li><a href="categories.html">🗂️ Categories</a></li>
+            <li><a href="suppliers.html">🚚 Suppliers</a></li>
+            <li><a href="customers.html">👥 Customers</a></li>
+            <li class="nav-section">Transactions</li>
+            <li><a href="purchase-orders.html">🛒 Purchase Orders</a></li>
+            <li><a href="sales-orders.html">💼 Sales Orders</a></li>
+            <li><a href="invoices.html">🧾 Invoices</a></li>
+            <li><a href="payments.html">💳 Payments</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <strong id="sidebar-username">–</strong>
+            <span id="sidebar-role"></span>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+        <div class="topbar">
+            <h1>Dashboard</h1>
+            <button class="logout-btn" id="logout-btn">Logout</button>
+        </div>
+        <div class="content">
+
+            <!-- Summary Cards -->
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-label">Products</div>
+                    <div class="card-value" id="cnt-products">–</div>
+                </div>
+                <div class="card green">
+                    <div class="card-label">Categories</div>
+                    <div class="card-value" id="cnt-categories">–</div>
+                </div>
+                <div class="card orange">
+                    <div class="card-label">Suppliers</div>
+                    <div class="card-value" id="cnt-suppliers">–</div>
+                </div>
+                <div class="card purple">
+                    <div class="card-label">Customers</div>
+                    <div class="card-value" id="cnt-customers">–</div>
+                </div>
+                <div class="card teal">
+                    <div class="card-label">Purchase Orders</div>
+                    <div class="card-value" id="cnt-po">–</div>
+                </div>
+                <div class="card red">
+                    <div class="card-label">Sales Orders</div>
+                    <div class="card-value" id="cnt-so">–</div>
+                </div>
+                <div class="card gray">
+                    <div class="card-label">Invoices</div>
+                    <div class="card-value" id="cnt-inv">–</div>
+                </div>
+                <div class="card green">
+                    <div class="card-label">Total Payments (₹)</div>
+                    <div class="card-value" id="cnt-pay">–</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><h2>Quick Links</h2></div>
+                <div class="panel-body">
+                    <a href="products.html" class="btn btn-primary">Manage Products</a>
+                    &nbsp;
+                    <a href="purchase-orders.html" class="btn btn-success">New Purchase Order</a>
+                    &nbsp;
+                    <a href="sales-orders.html" class="btn btn-warning">New Sales Order</a>
+                    &nbsp;
+                    <a href="invoices.html" class="btn btn-primary">Generate Invoice</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    initPage('dashboard.html');
+
+    // Load dashboard counts
+    apiGet('/dashboard').then(data => {
+        document.getElementById('cnt-products').textContent   = data.products;
+        document.getElementById('cnt-categories').textContent = data.categories;
+        document.getElementById('cnt-suppliers').textContent  = data.suppliers;
+        document.getElementById('cnt-customers').textContent  = data.customers;
+        document.getElementById('cnt-po').textContent         = data.purchaseOrders;
+        document.getElementById('cnt-so').textContent         = data.salesOrders;
+        document.getElementById('cnt-inv').textContent        = data.invoices;
+        document.getElementById('cnt-pay').textContent        = Number(data.totalPayments).toLocaleString('en-IN');
+    }).catch(err => console.error(err));
+</script>
+</body>
+</html>

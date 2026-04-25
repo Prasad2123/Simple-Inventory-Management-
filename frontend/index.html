@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Inventory Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <div class="login-box">
+        <h1>📦 Inventory System</h1>
+        <p>Sign in to continue</p>
+
+        <div id="msg"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="e.g. admin" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+        </form>
+
+        <p class="mt-8" style="font-size:11px;color:#aaa;text-align:center;">
+            Demo: admin / admin123 &nbsp;|&nbsp; manager / manager123
+        </p>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    // If already logged in, redirect to dashboard
+    if (localStorage.getItem('inv_user')) {
+        window.location.href = 'dashboard.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        try {
+            const data = await apiPost('/auth/login', { username, password });
+            // Store user info in localStorage (simple session)
+            localStorage.setItem('inv_user', JSON.stringify(data.user));
+            window.location.href = 'dashboard.html';
+        } catch (err) {
+            showMsg('msg', err.message, 'error');
+        }
+    });
+</script>
+</body>
+</html>
